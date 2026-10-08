@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayEase - Hotel Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Stay<span>Ease</span></div>
+
+    <nav>
+      <a href="#">Hotels</a>
+      <a href="#">Flights</a>
+      <a href="#">Deals</a>
+      <a href="#">Help</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="currency">₹ INR</button>
+      <button class="sign-in" id="signInBtn">Sign in</button>
+    </div>
+  </header>
+
+  <!-- HERO / SEARCH -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Find your perfect stay</h1>
+      <p>Search hotels, compare prices and book your next trip.</p>
+
+      <div class="search-box">
+
+        <div class="search-field">
+          <label>Where are you going?</label>
+          <input
+            type="text"
+            id="destination"
+            placeholder="City, hotel or destination"
+          >
+        </div>
+
+        <div class="search-field">
+          <label>Check-in</label>
+          <input type="date" id="checkIn">
+        </div>
+
+        <div class="search-field">
+          <label>Check-out</label>
+          <input type="date" id="checkOut">
+        </div>
+
+        <div class="search-field guests">
+          <label>Guests</label>
+          <button id="guestButton">2 Adults · 1 Room</button>
+
+          <div class="guest-popup" id="guestPopup">
+            <div class="guest-row">
+              <span>Adults</span>
+              <div>
+                <button class="minus" data-type="adults">−</button>
+                <span id="adults">2</span>
+                <button class="plus" data-type="adults">+</button>
+              </div>
+            </div>
+
+            <div class="guest-row">
+              <span>Children</span>
+              <div>
+                <button class="minus" data-type="children">−</button>
+                <span id="children">0</span>
+                <button class="plus" data-type="children">+</button>
+              </div>
+            </div>
+
+            <div class="guest-row">
+              <span>Rooms</span>
+              <div>
+                <button class="minus" data-type="rooms">−</button>
+                <span id="rooms">1</span>
+                <button class="plus" data-type="rooms">+</button>
+              </div>
+            </div>
+
+            <button class="done-btn" id="guestDone">Done</button>
+          </div>
+        </div>
+
+        <button class="search-btn" id="searchBtn">
+          Search
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <div class="breadcrumb">
+      Home / India / Hotels
+    </div>
+
+    <div class="page-layout">
+
+      <!-- FILTERS -->
+      <aside class="filters">
+
+        <h3>Filter by</h3>
+
+        <div class="filter-section">
+          <h4>Price per night</h4>
+
+          <label>
+            <input type="checkbox" class="price-filter" value="2000">
+            Under ₹2,000
+          </label>
+
+          <label>
+            <input type="checkbox" class="price-filter" value="4000">
+            Under ₹4,000
+          </label>
+
+          <label>
+            <input type="checkbox" class="price-filter" value="7000">
+            Under ₹7,000
+          </label>
+        </div>
+
+        <div class="filter-section">
+          <h4>Property type</h4>
+
+          <label>
+            <input type="checkbox" class="type-filter" value="Hotel">
+            Hotels
+          </label>
+
+          <label>
+            <input type="checkbox" class="type-filter" value="Resort">
+            Resorts
+          </label>
+
+          <label>
+            <input type="checkbox" class="type-filter" value="Apartment">
+            Apartments
+          </label>
+        </div>
+
+        <div class="filter-section">
+          <h4>Star rating</h4>
+
+          <label>
+            <input type="checkbox">
+            ⭐⭐⭐⭐⭐
+          </label>
+
+          <label>
+            <input type="checkbox">
+            ⭐⭐⭐⭐
+          </label>
+
+          <label>
+            <input type="checkbox">
+            ⭐⭐⭐
+          </label>
+        </div>
+
+      </aside>
+
+      <!-- RESULTS -->
+      <section class="results">
+
+        <div class="results-header">
+          <div>
+            <h2 id="resultsTitle">Hotels in popular destinations</h2>
+            <p id="resultCount">120 properties found</p>
+          </div>
+
+          <select id="sortSelect">
+            <option value="recommended">Recommended</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+          </select>
+        </div>
+
+        <div id="hotelList" class="hotel-list"></div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- SIGN IN MODAL -->
+  <div class="modal" id="signInModal">
+
+    <div class="modal-content">
+
+      <button class="close-modal" id="closeModal">×</button>
+
+      <h2>Welcome to StayEase</h2>
+      <p>Sign in to manage your bookings.</p>
+
+      <input type="email" id="email" placeholder="Email address">
+      <input type="password" id="password" placeholder="Password">
+
+      <button class="login-btn" id="loginBtn">
+        Sign in
+      </button>
+
+      <p class="signup-text">
+        New to StayEase?
+        <a href="#">Create an account</a>
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal" id="bookingModal">
+
+    <div class="modal-content">
+
+      <button class="close-modal" id="closeBooking">×</button>
+
+      <h2 id="bookingHotel"></h2>
+
+      <p>Complete your booking</p>
+
+      <input type="text" placeholder="Full name" id="bookingName">
+      <input type="email" placeholder="Email address" id="bookingEmail">
+
+      <button class="login-btn" id="confirmBooking">
+        Confirm booking
+      </button>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo">StayEase</div>
+    <p>© 2026 StayEase. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
